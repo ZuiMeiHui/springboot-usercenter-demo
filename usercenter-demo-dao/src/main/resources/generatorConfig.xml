@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	
+	<classPathEntry location="/Users/liyang/.m2/repository/mysql/mysql-connector-java/8.0.21/mysql-connector-java-8.0.21.jar" />
+
+	<context id="MySql" targetRuntime="MyBatis3">
+		
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<!-- 使用MyBatis Generator 快速初始化mapper，此处需要需要修改数据名及用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.30:3306/db_usercenter" userId="root" password="root" />
+
+		<javaModelGenerator targetPackage="com.zuimeihui.demo.pojo" targetProject="usercenter-demo-dao">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="mapper" targetProject="usercenter-demo-dao/src/main/resources" >
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator targetPackage="com.zuimeihui.demo.dao" targetProject="usercenter-demo-dao" type="XMLMAPPER" >
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<!-- 此处需修改表名及映射后实例名 -->
+		<table tableName="user_info" domainObjectName="UserInfo" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+	</context>
+</generatorConfiguration>

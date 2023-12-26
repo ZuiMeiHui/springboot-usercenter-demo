@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zuimeihui.demo.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.zuimeihui.demo.pojo.UserInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="time_create" jdbcType="TIMESTAMP" property="timeCreate" />
+    <result column="time_update" jdbcType="TIMESTAMP" property="timeUpdate" />
+    <result column="admin_id" jdbcType="VARCHAR" property="adminId" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_password_salt" jdbcType="VARCHAR" property="userPasswordSalt" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="user_telphone" jdbcType="VARCHAR" property="userTelphone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_remark" jdbcType="VARCHAR" property="userRemark" />
+    <result column="user_freeze" jdbcType="TINYINT" property="userFreeze" />
+    <result column="user_del" jdbcType="TINYINT" property="userDel" />
+  </resultMap>
+  
+  <!-- 自定义，以下 -->
+  <resultMap id="ResultMapWithDTO" extends="BaseResultMap" type="com.zuimeihui.demo.dto.UserInfoDTO" />
+  <sql id="Base_Where">
+  	<if test="id != null">
+		and id=#{id, jdbcType=BIGINT}
+	</if>
+	<if test="timeCreateBegin != null and timeCreateEnd != null">
+		and time_create &gt;= #{timeCreateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeCreateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="timeUpdateBegin != null and timeUpdateEnd != null">
+		and time_update &gt;= #{timeUpdateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeUpdateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="adminId != null and adminId != ''">
+		and admin_id=#{adminId, jdbcType=VARCHAR}
+	</if>
+	<if test="adminName != null and adminName != ''">
+		and admin_name=#{adminName, jdbcType=VARCHAR}
+	</if>
+	<if test="userName != null and userName != ''">
+		and user_name=#{userName, jdbcType=VARCHAR}
+	</if>
+	<if test="userNickname != null and userNickname != ''">
+		<bind name="likeUserNickname" value="'%' + _parameter.userNickname + '%'" />
+		and user_nickname like #{likeUserNickname, jdbcType=VARCHAR}
+	</if>
+	<if test="userTelphone != null and userTelphone != ''">
+		and user_telphone=#{userTelphone, jdbcType=VARCHAR}
+	</if>
+	<if test="userEmail != null and userEmail != ''">
+		and user_email=#{userEmail, jdbcType=VARCHAR}
+	</if>
+	<if test="userFreeze != null">
+		and user_freeze=#{userFreeze, jdbcType=TINYINT}
+	</if>
+	<if test="userDel != null">
+		and user_del=#{userDel, jdbcType=TINYINT}
+	</if>
+  </sql>
+  <!-- 自定义，以上 -->
+  
+  <sql id="Base_Column_List">
+    id, time_create, time_update, admin_id, admin_name, user_name, user_password, user_password_salt, user_nickname, 
+    user_telphone, user_email, user_remark, user_freeze, user_del
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithDTO">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 自定义，以下 -->
+  <select id="selectBy" parameterType="com.zuimeihui.demo.dto.UserInfoQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from user_info where 1=1 
+	  <include refid="Base_Where" />
+	  order by 
+	  <choose>
+		  <when test="fields == 'id'">id</when>
+		  <otherwise>id</otherwise>
+	  </choose>
+	  <choose>
+		  <when test="order == 'asc'">asc</when>
+		  <when test="order == 'desc'">desc</when>
+		  <otherwise>desc</otherwise>
+	  </choose>
+	  <if test="isPage">limit #{start}, #{end}</if>
+  </select>
+  <select id="countBy" parameterType="com.zuimeihui.demo.dto.UserInfoQueryDTO" resultType="java.lang.Integer">
+	  select count(1) from user_info where 1=1 
+	  <include refid="Base_Where" />
+  </select>
+  <select id="uniqueBy" parameterType="com.zuimeihui.demo.dto.UserInfoQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from user_info where 1=1 
+	  <include refid="Base_Where" />
+	  limit 1
+  </select>
+  <!-- 自定义，以上 -->
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zuimeihui.demo.pojo.UserInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into user_info (id, time_create, time_update, 
+      admin_id, admin_name, user_name, 
+      user_password, user_password_salt, user_nickname, user_telphone, 
+      user_email, user_remark, user_freeze, 
+      user_del
+      )
+    values (#{id,jdbcType=BIGINT}, #{timeCreate,jdbcType=TIMESTAMP}, #{timeUpdate,jdbcType=TIMESTAMP}, 
+      #{adminId,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userPasswordSalt,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, 
+      #{userTelphone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userRemark,jdbcType=VARCHAR}, 
+      #{userFreeze,jdbcType=TINYINT}, #{userDel,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zuimeihui.demo.pojo.UserInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="timeCreate != null">
+        time_create,
+      </if>
+      <if test="timeUpdate != null">
+        time_update,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userPasswordSalt != null">
+        user_password_salt,
+      </if>
+      <if test="userNickname != null">
+        user_nickname,
+      </if>
+      <if test="userTelphone != null">
+        user_telphone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userRemark != null">
+        user_remark,
+      </if>
+      <if test="userFreeze != null">
+        user_freeze,
+      </if>
+      <if test="userDel != null">
+        user_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="timeCreate != null">
+        #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswordSalt != null">
+        #{userPasswordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null">
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userTelphone != null">
+        #{userTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userRemark != null">
+        #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userFreeze != null">
+        #{userFreeze,jdbcType=TINYINT},
+      </if>
+      <if test="userDel != null">
+        #{userDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zuimeihui.demo.pojo.UserInfo">
+    update user_info
+    <set>
+      <if test="timeCreate != null">
+        time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswordSalt != null">
+        user_password_salt = #{userPasswordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null">
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userTelphone != null">
+        user_telphone = #{userTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userRemark != null">
+        user_remark = #{userRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userFreeze != null">
+        user_freeze = #{userFreeze,jdbcType=TINYINT},
+      </if>
+      <if test="userDel != null">
+        user_del = #{userDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zuimeihui.demo.pojo.UserInfo">
+    update user_info
+    set time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_password_salt = #{userPasswordSalt,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_telphone = #{userTelphone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_remark = #{userRemark,jdbcType=VARCHAR},
+      user_freeze = #{userFreeze,jdbcType=TINYINT},
+      user_del = #{userDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
