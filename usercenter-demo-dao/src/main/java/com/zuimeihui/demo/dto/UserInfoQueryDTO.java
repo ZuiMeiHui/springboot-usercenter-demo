@@ -14,8 +14,9 @@ import lombok.experimental.Tolerate;
 /**
  * 用户表queryDTO
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 14:53:24
+ * @ClassName: UserInfoQueryDTO
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter
@@ -24,13 +25,13 @@ import lombok.experimental.Tolerate;
 public class UserInfoQueryDTO extends PageCustom implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Tolerate
 	public UserInfoQueryDTO() {
-		
+
 	}
 
-    private Long id;
+	private Long id;
 
 	private Date timeCreateBegin;
 
@@ -40,20 +41,20 @@ public class UserInfoQueryDTO extends PageCustom implements Serializable {
 
 	private Date timeUpdateEnd;
 
-    private String adminId;
+	private String adminId;
 
-    private String adminName;
+	private String adminName;
 
-    private String userName;
+	private String userName;
 
-    private String userNickname;
+	private String userNickname;
 
-    private String userTelphone;
+	private String userTelphone;
 
-    private String userEmail;
+	private String userEmail;
 
-    private Boolean userFreeze;
+	private Boolean userFreeze;
 
-    private Boolean userDel;
+	private Boolean userDel;
 
 }

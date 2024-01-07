@@ -8,8 +8,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 注册过滤器
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:54:37
+ * @ClassName: FilterConfig
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Configuration
 public class FilterConfig {
@@ -20,7 +21,12 @@ public class FilterConfig {
 	/**
 	 * 注册oAuthFilter过滤
 	 * 
-	 * @return
+	 * @Title: registerAuthFilter
+	 * @Description: TODO
+	 * @param @return 参数
+	 * @return FilterRegistrationBean<OAuthFilter> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@Bean
 	public FilterRegistrationBean<OAuthFilter> registerAuthFilter() {

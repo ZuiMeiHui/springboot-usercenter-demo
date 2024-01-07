@@ -20,8 +20,9 @@ import org.springframework.web.client.RestTemplate;
 /**
  * 封装RestTemplate
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 20:05:11
+ * @ClassName: RestTemplateCustom
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Component
 public class RestTemplateCustom extends RestTemplate {

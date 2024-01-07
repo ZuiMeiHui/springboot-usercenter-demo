@@ -7,8 +7,9 @@ import com.zuimeihui.demo.common.enums.BaseResultEnum;
 /**
  * API接口，返回结果集
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-12-03 10:33:47
+ * @ClassName: ApiResult
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 public class ApiResult<T> implements Serializable {
 

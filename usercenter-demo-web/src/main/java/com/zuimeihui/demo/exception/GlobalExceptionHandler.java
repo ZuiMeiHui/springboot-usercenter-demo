@@ -16,14 +16,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zuimeihui.demo.common.service.BaseResult;
 
+/**
+ * 异常收集
+ * 
+ * @ClassName: GlobalExceptionHandler
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public BaseResult<?> exceptionHandler(HttpServletRequest request, Exception e) {
-//		SecureRandom secureRandom = new SecureRandom();
-//		Integer id = secureRandom.nextInt();
 		String body = null;
 		if (request != null && request instanceof ContentCachingRequestWrapper) {
 			ContentCachingRequestWrapper wrapper = (ContentCachingRequestWrapper) request;
@@ -46,4 +51,5 @@ public class GlobalExceptionHandler {
 			return "{}";
 		}
 	}
+	
 }

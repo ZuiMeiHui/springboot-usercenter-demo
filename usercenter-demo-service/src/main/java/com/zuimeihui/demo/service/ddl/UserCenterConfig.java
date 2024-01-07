@@ -17,14 +17,16 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 /**
  * db_usercenter库 - 数据库配置
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:17:35
+ * @ClassName: UserCenterConfig
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Configuration
-@MapperScan(basePackages = { "com.zuimeihui.demo.dao", "com.zuimeihui.demo.dao.*" }, sqlSessionFactoryRef = "dbUserCenterSqlSessionFactory")
+@MapperScan(basePackages = { "com.zuimeihui.demo.dao",
+		"com.zuimeihui.demo.dao.*" }, sqlSessionFactoryRef = "dbUserCenterSqlSessionFactory")
 public class UserCenterConfig {
 
-	@Primary 
+	@Primary
 	@Bean("dbUserCenterDataSource")
 	@ConfigurationProperties(prefix = "spring.datasource.usercenter")
 	public DataSource getUserDataSource() {
@@ -45,4 +47,5 @@ public class UserCenterConfig {
 	public SqlSessionTemplate userSqlSessionTemplate(@Qualifier("dbUserCenterSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+	
 }

@@ -3,8 +3,9 @@ package com.zuimeihui.demo.common.enums;
 /**
  * 返回结果集枚举
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 11:00:52
+ * @ClassName: BaseResultEnum
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 public enum BaseResultEnum {
 

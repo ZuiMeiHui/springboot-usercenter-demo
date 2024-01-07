@@ -15,8 +15,9 @@ import com.zuimeihui.demo.dto.UserInfoQueryDTO;
 /**
  * 用户表，服务层
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 20:29:00
+ * @ClassName: UserInfoService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Service
 public class UserInfoService extends BaseService<UserInfoMapper, UserInfoDTO, UserInfoQueryDTO> {
@@ -24,9 +25,14 @@ public class UserInfoService extends BaseService<UserInfoMapper, UserInfoDTO, Us
 	/**
 	 * 保存和更新
 	 * 
-	 * @param dto
-	 * @param userId
-	 * @param userName
+	 * @Title: save
+	 * @Description: TODO
+	 * @param @param dto
+	 * @param @param userId
+	 * @param @param userName 参数
+	 * @return void 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public void save(UserInfoDTO dto, String userId, String userName) {
 		dto.setAdminId(userId);

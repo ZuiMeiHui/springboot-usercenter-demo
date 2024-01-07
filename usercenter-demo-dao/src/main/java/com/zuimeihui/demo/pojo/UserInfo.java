@@ -7,39 +7,46 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * 用户表POJO
+ * 
+ * @ClassName: UserInfo
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
+ */
 @Setter
 @Getter
 @ToString
 public class UserInfo implements Serializable {
-	
-    private static final long serialVersionUID = 1L;
 
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private Date timeCreate;
+	private Long id;
 
-    private Date timeUpdate;
+	private Date timeCreate;
 
-    private String adminId;
+	private Date timeUpdate;
 
-    private String adminName;
+	private String adminId;
 
-    private String userName;
+	private String adminName;
 
-    private String userPassword;
-    
-    private String userPasswordSalt;
+	private String userName;
 
-    private String userNickname;
+	protected String userPassword;
 
-    private String userTelphone;
+	protected String userPasswordSalt;
 
-    private String userEmail;
+	private String userNickname;
 
-    private String userRemark;
+	private String userTelphone;
 
-    private Boolean userFreeze;
+	private String userEmail;
 
-    private Boolean userDel;
+	private String userRemark;
+
+	private Boolean userFreeze;
+
+	private Boolean userDel;
 
 }

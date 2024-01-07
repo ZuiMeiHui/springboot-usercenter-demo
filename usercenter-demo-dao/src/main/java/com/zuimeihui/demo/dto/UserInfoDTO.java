@@ -1,5 +1,6 @@
 package com.zuimeihui.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zuimeihui.demo.pojo.UserInfo;
 
 import lombok.Getter;
@@ -9,8 +10,9 @@ import lombok.ToString;
 /**
  * 用户表DTO
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 14:53:06
+ * @ClassName: UserInfoDTO
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter
@@ -18,5 +20,17 @@ import lombok.ToString;
 public class UserInfoDTO extends UserInfo {
 
 	private static final long serialVersionUID = 1L;
+
+	@JsonIgnore
+	@Override
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	@JsonIgnore
+	@Override
+	public String getUserPasswordSalt() {
+		return userPasswordSalt;
+	}
 
 }

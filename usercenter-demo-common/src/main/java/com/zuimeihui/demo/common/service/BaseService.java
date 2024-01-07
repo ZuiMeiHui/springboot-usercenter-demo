@@ -9,10 +9,11 @@ import com.zuimeihui.demo.common.dto.PageCustom;
 import com.zuimeihui.demo.common.pojo.PageBean;
 
 /**
- * BaseService
+ * 基础服务层
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 10:27:20
+ * @ClassName: BaseService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageCustom> {
 
@@ -22,8 +23,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 通过主键查询记录
 	 * 
-	 * @param id
-	 * @return
+	 * @Title: get
+	 * @Description: TODO
+	 * @param @param  id
+	 * @param @return 参数
+	 * @return T 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public T get(Long id) {
 		return handleQueryResult(mapper.selectByPrimaryKey(id), null);
@@ -32,7 +38,12 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 通过主键删除记录
 	 * 
-	 * @param id
+	 * @Title: remove
+	 * @Description: TODO
+	 * @param @param id 参数
+	 * @return void 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public void remove(Long id) {
 		mapper.deleteByPrimaryKey(id);
@@ -41,8 +52,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 通过条件分页查询
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: selectPageBy
+	 * @Description: TODO
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return PageBean<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public PageBean<T> selectPageBy(Q queryDTO) {
 		queryDTO.setIsPage(true);
@@ -53,8 +69,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 通过条件查询
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: selectBy
+	 * @Description: TODO
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return List<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public List<T> selectBy(Q queryDTO) {
 		queryDTO.setIsPage(false);
@@ -62,10 +83,15 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	}
 
 	/**
-	 * 通过条件获取但行记录
+	 * 通过条件获取一行记录
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: uniqueBy
+	 * @Description: TODO
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return T 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public T uniqueBy(Q queryDTO) {
 		queryDTO.setIsPage(false);
@@ -76,8 +102,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 查询前的入参处理
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: handleQueryParam
+	 * @Description: TODO
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return Q 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public Q handleQueryParam(Q queryDTO) {
 		return queryDTO;
@@ -86,8 +117,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 单条查询后的结果集处理
 	 * 
-	 * @param dto
-	 * @return
+	 * @Title: handleQueryResult
+	 * @Description: TODO
+	 * @param @param  dto
+	 * @param @return 参数
+	 * @return T 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public T handleQueryResult(T dto) {
 		return handleQueryResult(dto);
@@ -96,8 +132,14 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 单条查询后的结果集处理
 	 * 
-	 * @param dto
-	 * @return
+	 * @Title: handleQueryResult
+	 * @Description: TODO
+	 * @param @param  dto
+	 * @param @param  isList
+	 * @param @return 参数
+	 * @return T 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public T handleQueryResult(T dto, Boolean isList) {
 		return dto;
@@ -106,8 +148,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 多条查询后的结果集处理
 	 * 
-	 * @param dto
-	 * @return
+	 * @Title: handleQueryResult
+	 * @Description: TODO
+	 * @param @param  dtos
+	 * @param @return 参数
+	 * @return List<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public List<T> handleQueryResult(List<T> dtos) {
 		for (T dto : dtos) {
@@ -119,8 +166,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 新增数据参数校验
 	 * 
-	 * @param dto
-	 * @return
+	 * @Title: checkSaveInput
+	 * @Description: TODO
+	 * @param @param  dto
+	 * @param @return 参数
+	 * @return BaseResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public BaseResult<?> checkSaveInput(T dto) {
 		return BaseResult.success();
@@ -129,8 +181,13 @@ public abstract class BaseService<M extends BaseMapper<T, Q>, T, Q extends PageC
 	/**
 	 * 删除数据参数校验
 	 * 
-	 * @param id
-	 * @return
+	 * @Title: checkRemove
+	 * @Description: TODO
+	 * @param @param  id
+	 * @param @return 参数
+	 * @return BaseResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public BaseResult<?> checkRemove(Long id) {
 		return BaseResult.success();

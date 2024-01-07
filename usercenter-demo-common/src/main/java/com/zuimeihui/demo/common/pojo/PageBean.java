@@ -8,10 +8,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 分页bean
+ * 分页
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 10:37:04
+ * @ClassName: PageBean
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter

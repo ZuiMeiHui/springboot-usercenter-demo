@@ -10,22 +10,23 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import com.zuimeihui.demo.common.constants.Constants;
 
 /**
- * 将用户信息放入Request中
+ * 将用户关键信息放入Request中
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:51:27
+ * @ClassName: TokenRequestWrapper
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 public class TokenRequestWrapper extends HttpServletRequestWrapper {
 
-	private String token;
+	private String accessToken;
 
 	private String userId;
 
 	private String userName;
 
-	TokenRequestWrapper(HttpServletRequest request, String token, String userId, String userName) {
+	TokenRequestWrapper(HttpServletRequest request, String accessToken, String userId, String userName) {
 		super(request);
-		this.token = token;
+		this.accessToken = accessToken;
 		this.userId = userId;
 		this.userName = userName;
 	}
@@ -43,12 +44,12 @@ public class TokenRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String[] getParameterValues(String name) {
 		if (Constants.USER_TOKEN_KEY.equals(name)) {
-			return new String[] { token };
+			return new String[] { accessToken };
 		}
-		if (Constants.USER_ID_KEY.equals(userId)) {
+		if (Constants.USER_ID_KEY.equals(name)) {
 			return new String[] { userId };
 		}
-		if (Constants.USER_NAME_KEY.equals(userName)) {
+		if (Constants.USER_NAME_KEY.equals(name)) {
 			return new String[] { userName };
 		}
 		return super.getParameterValues(name);
@@ -57,12 +58,12 @@ public class TokenRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		if (Constants.USER_TOKEN_KEY.equals(name)) {
-			return token;
+			return accessToken;
 		}
-		if (Constants.USER_ID_KEY.equals(userId)) {
+		if (Constants.USER_ID_KEY.equals(name)) {
 			return userId;
 		}
-		if (Constants.USER_NAME_KEY.equals(userName)) {
+		if (Constants.USER_NAME_KEY.equals(name)) {
 			return userName;
 		}
 		return super.getParameter(name);

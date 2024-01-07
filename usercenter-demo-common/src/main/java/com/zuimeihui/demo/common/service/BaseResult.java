@@ -16,8 +16,9 @@ import lombok.experimental.Accessors;
 /**
  * 通用接口，返回结果集
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 11:03:36
+ * @ClassName: BaseResult
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Accessors(chain = true)
 public class BaseResult<T> extends ApiResult<T> {
@@ -31,9 +32,14 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 返回成功数据 （status 200）
 	 * 
-	 * @param <T>
-	 * @param data
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> success(T data) {
 		return new BaseResult<T>(BaseResultEnum.SUCCESS.getCode(), BaseResultEnum.SUCCESS.getValue(), data);
@@ -42,19 +48,30 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 返回成功数据 （status 200）
 	 * 
-	 * @param <T>
-	 * @param msg
-	 * @param data
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  msg
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> success(String msg, T data) {
-		return new BaseResult<T>(BaseResultEnum.SUCCESS.getCode(), msg != null ? msg.toString() : BaseResultEnum.SUCCESS.getValue(), data);
+		return new BaseResult<T>(BaseResultEnum.SUCCESS.getCode(),
+				msg != null ? msg.toString() : BaseResultEnum.SUCCESS.getValue(), data);
 	}
 
 	/**
 	 * 返回成功数据 （status 200）
 	 * 
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @return 参数
+	 * @return BaseResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static BaseResult<?> success() {
 		return success(null);
@@ -63,21 +80,32 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 返回错误数据（status 500）
 	 * 
-	 * @param <T>
-	 * @param msg
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  msg
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> fail(String msg) {
-		return new BaseResult<T>(BaseResultEnum.FAIL.getCode(), msg != null ? msg.toString() : BaseResultEnum.FAIL.getValue(), null);
+		return new BaseResult<T>(BaseResultEnum.FAIL.getCode(),
+				msg != null ? msg.toString() : BaseResultEnum.FAIL.getValue(), null);
 	}
 
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param code
-	 * @param messsage
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  code
+	 * @param @param  message
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> fail(Integer code, String message) {
 		return new BaseResult<T>(code, message, null);
@@ -86,10 +114,15 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param type
-	 * @param message
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  type
+	 * @param @param  message
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> fail(BaseResultEnum type, String message) {
 		String s = StringUtils.isBlank(message) ? message : type.getValue() + "," + message;
@@ -99,11 +132,16 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param code
-	 * @param message
-	 * @param data
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  code
+	 * @param @param  message
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return BaseResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> BaseResult<T> fail(Integer code, String message, T data) {
 		return new BaseResult<T>(code, message, data);
@@ -130,9 +168,14 @@ public class BaseResult<T> extends ApiResult<T> {
 	/**
 	 * 分页
 	 * 
-	 * @param pageMap
-	 * @param list
-	 * @return
+	 * @Title: successPage
+	 * @Description: TODO
+	 * @param @param  pageMap
+	 * @param @param  list
+	 * @param @return 参数
+	 * @return BaseResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static BaseResult<?> successPage(Map<String, ?> pageMap, List<?> list) {
 		if (list == null) {
